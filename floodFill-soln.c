@@ -137,10 +137,6 @@ void floodFill(char image[10][10], int x, int y, char value, char bound)
 	push(stack, x, y);
 	visited = insert(visited, x, y);
 
-	// Variables to keep track of current co-ordinates we are visiting.
-	int curr_x;
-	int curr_y;
-
 	// Keep visiting co-ordinates until you can't visit anymore!
 	while (!isEmpty(stack)) {
 		// Remove co-ordinate from queue to being analysis.
@@ -148,16 +144,15 @@ void floodFill(char image[10][10], int x, int y, char value, char bound)
 
 		// Visit all of the neighbours! (up, down, left, right)
 		for (int i = 0; i < 4; i++) {
-			curr_x = (node->x) + offset[i][0];
-			curr_y = (node->y) + offset[i][1];
+			x = (node->x) + offset[i][0];
+			y = (node->y) + offset[i][1];
 		
 			// If the co-ordinate above exists on the map, has not been visited, and is not a boundary.
-			if (onmap(curr_x, curr_y) && !search(visited, curr_x, curr_y) && 
-					(int) image[curr_x][curr_y] != (int) bound) {
+			if (onmap(x, y) && !search(visited, x, y) && (int) image[x][y] != (int) bound) {
 				// visit the co-ordinate.
-				image[curr_x][curr_y] = value;
-				push(stack, curr_x, curr_y);
-				visited = insert(visited, curr_x, curr_y);
+				image[x][y] = value;
+				push(stack, x, y);
+				visited = insert(visited, x, y);
 			}
 		}
 	}
